@@ -1,15 +1,13 @@
 <?php
-// Konfigurasi Database
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "my_database";
+$host = 'localhost';
+$db = 'my_database';
+$user = 'root';
+$pass = ''; 
 
-// Membuat koneksi
-$conn = mysqli_connect($host, $username, $password, $database);
-
-// Cek koneksi
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Database connection failed: " . $e->getMessage());
 }
-?> 
+?>

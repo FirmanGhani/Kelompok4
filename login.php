@@ -29,7 +29,7 @@
                 </div>
                 <button type="submit" class="btn">Login</button>
             </form>
-            <p class="register-link">Belum punya akun? <a href="">Daftar di sini</a></p>
+            <p class="register-link">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
         </div>
     </div>
 </body>
