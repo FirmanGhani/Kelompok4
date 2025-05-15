@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Cek apakah username sudah ada
-    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->store_result();
@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashedPassword = md5($password);
 
     // Insert user baru
-    $insert = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
+    $insert = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
     $insert->bind_param("sss", $username, $email, $hashedPassword);
 
     if ($insert->execute()) {
