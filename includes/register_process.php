@@ -23,7 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Cek apakah username sudah ada
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
+    $stmt->execute([$username]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->execute();
     $stmt->store_result();
 
