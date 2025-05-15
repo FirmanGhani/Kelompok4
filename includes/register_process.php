@@ -25,28 +25,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    $stmt->execute();
-    $stmt->store_result();
 
-    if ($stmt->num_rows > 0) {
+    if ($user) {
         $error = "Username sudah digunakan, coba yang lain.";
         header("Location: ../register.php?error=" . urlencode($error));
         exit;
     }
 
-    // Hash password (gunakan md5 sesuai struktur tabel kamu, meskipun sebaiknya pakai password_hash)
+    // Hash password (gunakan md5 sesuai struktur tabel kamu)
     $hashedPassword = md5($password);
 
     // Insert user baru
     $insert = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'user')");
-    $insert->bind_param("sss", $username, $email, $hashedPassword);
+    $success = $insert->execute([$username, $email, $hashedPassword]);
 
-    if ($insert->execute()) {
-        // Register berhasil
+    if ($success) {
         header("Location: ../login.php?success=" . urlencode("Registrasi berhasil! Silakan login."));
         exit;
     } else {
-        // Gagal insert
         $error = "Gagal melakukan registrasi.";
         header("Location: ../register.php?error=" . urlencode($error));
         exit;
