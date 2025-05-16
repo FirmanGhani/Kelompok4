@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // Validasi data tidak boleh kosong
+    // Validasi data
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         $error = "Semua field wajib diisi!";
         header("Location: ../register.php?error=" . urlencode($error));
@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Hash password (gunakan md5 sesuai struktur tabel kamu)
+    // Hash password
     $hashedPassword = md5($password);
 
     // Insert user baru
