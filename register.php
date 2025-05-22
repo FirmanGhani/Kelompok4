@@ -11,8 +11,10 @@
         <div class="form-container">
             <h2>Registrasi</h2>
             <?php
-            if (isset($error)) {
-                echo '<div class="error-message">' . $error . '</div>';
+            session_start();
+            if (isset($_SESSION['error'])) {
+                echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
+                unset($_SESSION['error']);
             }
             ?>
             <form action="includes/register_process.php" method="POST">

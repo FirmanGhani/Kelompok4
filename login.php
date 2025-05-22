@@ -18,6 +18,13 @@
                 echo '<div class="error-message">' . $error . '</div>';
             }
             ?>
+            <?php
+            session_start();
+            if (isset($_SESSION['error'])) {
+                echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
+                unset($_SESSION['error']);
+            }
+            ?>
             <form action="includes/login_process.php" method="POST">
                 <div class="form-group">
                     <label for="username">Username:</label>
