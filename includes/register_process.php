@@ -123,9 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-/**
- * Fungsi untuk validasi kekuatan password (sama seperti di change_password.php)
- */
+ // Fungsi untuk validasi kekuatan password (sama seperti di change_password.php)
 function validate_password($password, $strength) {
     switch ($strength) {
         case 'high':
