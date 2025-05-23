@@ -15,12 +15,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Validasi username (minimal 3 karakter, hanya huruf, angka, dan underscore)
+    // Validasi username (minimal 3 karakter)
     if (strlen($username) < 3) {
         $_SESSION['error'] = "Username minimal 3 karakter.";
         header("Location: ../register.php");
         exit();
     }
+
+    //Validasi  (hanya huruf, angka, dan underscore)
+    if (strlen($username) < 3) {
+        $_SESSION['error'] = "Username minimal 3 karakter.";
+        header("Location: ../register.php");
+        exit();
+    }
+
 
     if (!preg_match('/^[a-zA-Z0-9_]+$/', $username)) {
         $_SESSION['error'] = "Username hanya boleh mengandung huruf, angka, dan underscore.";
