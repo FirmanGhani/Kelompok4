@@ -11,18 +11,28 @@
         <div class="form-container">
             <h2>Login</h2>
             <?php
+            session_start();
+            
+            // Pesan sukses dari URL parameter
+            if (isset($_GET['success'])) {
+                echo '<div class="success-message">' . htmlspecialchars($_GET['success']) . '</div>';
+            }
+            
+            // Pesan sukses registrasi
             if (isset($_GET['success'])) {
                 echo '<div class="success-message">Registrasi berhasil! Silakan login.</div>';
             }
-            if (isset($error)) {
-                echo '<div class="error-message">' . $error . '</div>';
-            }
-            ?>
-            <?php
-            session_start();
+            
+            // Error dari session
             if (isset($_SESSION['error'])) {
-                echo '<div class="error-message">' . $_SESSION['error'] . '</div>';
+                echo '<div class="error-message">' . htmlspecialchars($_SESSION['error']) . '</div>';
                 unset($_SESSION['error']);
+            }
+            
+            // Pesan sukses dari session
+            if (isset($_SESSION['success_message'])) {
+                echo '<div class="success-message">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+                unset($_SESSION['success_message']);
             }
             ?>
             <form action="includes/login_process.php" method="POST">
@@ -40,4 +50,4 @@
         </div>
     </div>
 </body>
-</html> 
+</html>
